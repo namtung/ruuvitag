@@ -1,28 +1,16 @@
 # RuuviTag
-> A simple and clean Python library for [RuuviTag](https://ruuvi.com/ruuvitag-specs/)
+> Raspberry Pi compatible Docker base image for collecting Ruuvitag data based on [Kipe] (https://github.com/kipe/ruuvitag)
 
 ## Installation
-As the library is based on [bluepy](https://github.com/IanHarvey/bluepy),
-compilation of `bluepy-helper` is required. This requires `glib2` development
-packages.
 
-On Debian-based systems the installation goes a bit like:
-
+Build Docker image
 ```sh
-sudo apt-get install libglib2.0-dev
-pip install git+https://github.com/kipe/ruuvitag.git
+docker build -t <image-name> .
 ```
 
 ## Usage
-For basic usage, you can just run `RuuviTag.scan()` in a loop, like this:
+For basic usage:
 
-```python
-from ruuvitag import RuuviTag
-
-while True:
-    for tag in RuuviTag.scan():
-        print(tag)
+```sh
+docker run -it --privileged --net=host <image-name>:latest
 ```
-
-For more complicated examples including threading, and motion detection,
-see `examples` directory.
