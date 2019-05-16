@@ -4,5 +4,6 @@ RUN apt-get update && apt-get install -y python python-setuptools git python-pip
 RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install git+https://github.com/namtung/ruuvitag.git
 COPY ruuvi.py ./
+RUN hcitool scan
 RUN chmod +x ./ruuvi.py
 CMD ["python","./ruuvi.py"]

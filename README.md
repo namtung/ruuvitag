@@ -1,5 +1,5 @@
 # RuuviTag
-> Raspberry Pi compatible Docker base image for collecting Ruuvitag data based on [Kipe] (https://github.com/kipe/ruuvitag)
+> Raspberry Pi compatible Docker base image for collecting Ruuvitag data based on [Kipe](https://github.com/kipe/ruuvitag)
 
 ## Installation
 
