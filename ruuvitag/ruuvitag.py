@@ -7,6 +7,7 @@ from bitstring import BitArray
 
 class RuuviTag(object):
     '''An instance of RuuviTag. Usually created by RuuviTag.scan().'''
+
     def __init__(self, address, protocol, temperature=float('nan'),
                  humidity=float('nan'), pressure=float('nan'),
                  acceleration_x=float('nan'), acceleration_y=float('nan'),
@@ -34,7 +35,7 @@ class RuuviTag(object):
         '''
 
         #: pendulum.instance: datetime of last update
-        self.last_seen = pendulum.now()
+        self.last_seen = pendulum.now('UTC')
         self.address = address
         self.protocol = protocol
         self.temperature = temperature
@@ -52,12 +53,24 @@ class RuuviTag(object):
         self.movement_detected = Event()
 
     def __repr__(self):
-        return '<RuuviTag V%i %s %.02fc, %.02f%%, %s>' % (
-            self.protocol,
+        return '{"mac": "%s",\
+            "temperature":%.02f,\
+            "humidity":%.02f,\
+            "pressure":%.01f,\
+            "time": "%s",\
+            "time_sec": %d, \
+            "acceleration_x":%.02f,\
+            "acceleration_y":%.02f,\
+            "acceleration_z":%.02f}' % (
             self.address,
             self.temperature,
             self.humidity,
-            self.last_seen.isoformat()
+            self.pressure,
+            self.last_seen.format('YYYY-MM-DD HH:mm:ss'),
+            self.last_seen.int_timestamp,
+            self.acceleration_x,
+            self.acceleration_y,
+            self.acceleration_z
         )
 
     def update(self, temperature=None, humidity=None, pressure=None,
@@ -88,7 +101,7 @@ class RuuviTag(object):
                 previous value
         '''
 
-        self.last_seen = pendulum.now()
+        self.last_seen = pendulum.now('UTC')
 
         self.temperature = temperature
         self.humidity = humidity
