@@ -7,10 +7,14 @@ Build Docker image
 ```sh
 docker build -t <image-name> .
 ```
+Or pull the image from Docker Hub
+```sh
+docker pull namtung/rpi-ruuvitag
+```
 
 ## Usage
 For basic usage:
 
 ```sh
-docker run -it --cap-add=NET_ADMIN --net=host <image-name>:latest
+docker run -it --cap-add=NET_ADMIN --net=host rpi-ruuvitag:latest
 ```
