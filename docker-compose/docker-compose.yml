@@ -1,0 +1,29 @@
+version: "3.6"
+services:
+  ruuvi:
+    image: namtung/rpi-ruuvitag
+    container_name: ruuvi
+    restart: always
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - $PWD/ruuvi.py:/ruuvi.py
+  influxdb:
+    image: arm32v7/influxdb
+    container_name: influxdb
+    restart: always
+    network_mode: "host"
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+  telegraf:
+    image: arm32v7/telegraf
+    container_name: telegraf
+    restart: always
+    network_mode: "host"
+    volumes:
+      - $PWD/telegraf.conf:/etc/telegraf/telegraf.conf
+    
+volumes:
+  influxdb-data:
+    external: true
