@@ -5,7 +5,7 @@
 
 Build Docker image
 ```sh
-docker build -t <image-name> .
+docker build -t rpi-ruuvitag:latest .
 ```
 Or pull the image from Docker Hub
 ```sh
