@@ -23,6 +23,11 @@ services:
     network_mode: "host"
     volumes:
       - $PWD/telegraf.conf:/etc/telegraf/telegraf.conf
+  chronograf:
+    image: arm32v7/chronograf
+    container_name: chronograf
+    restart: always
+    network_mode: "host"
     
 volumes:
   influxdb-data:
